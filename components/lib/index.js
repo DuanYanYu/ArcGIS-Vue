@@ -1,8 +1,6 @@
-import Demo from './demo';
 import GisCore from './giscore';
 
 const components = {
-    Demo,
     GisCore
 }
 

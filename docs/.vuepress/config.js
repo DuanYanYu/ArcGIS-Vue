@@ -8,8 +8,7 @@ module.exports = {
     themeConfig: {
         sidebar: [
             ['/', '首页'],
-            ['/componentDoc/first', '快速开始'],
-            ['/componentDoc/demo', '示例组件'],     
+            ['/componentDoc/first', '快速开始'], 
             ['/componentDoc/gisCore', '地图']     
         ],
         nav: [
