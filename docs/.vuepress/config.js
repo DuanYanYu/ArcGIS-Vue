@@ -23,7 +23,7 @@ module.exports = {
                     { text: 'English', link: '/language/english/' }
                 ]
             },
-            { text: 'GitHub', link: 'https://gitee.com/yan_duan/arcgis4js-components' },
+            { text: 'GitHub', link: 'https://github.com/DuanYanYu/ArcGIS-Vue' },
             { text: 'Npm', link: 'https://www.npmjs.com/package/arcgis4js-components' },
             
         ],

@@ -1,21 +1,45 @@
 <template>
   <div id="app">
     <div>
-      <GisCore :mWidth="600" :mHeight="400" />
-      <GisCore :mWidth="600" :mHeight="400" baseMapUrl="http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineCommunity_Mobile/MapServer"/>
-      <GisCore :mWidth="600" :mHeight="400" baseMapUrl="ColorMapEng"/>
-      <!-- <GisCore :mWidth="600" :mHeight="400" baseMapUrl="ColorMapChina2"/>
-      <GisCore :mWidth="600" :mHeight="400" baseMapUrl="ChinaStreetGray"/>
-      <GisCore :mWidth="600" :mHeight="400" baseMapUrl="ChinaStreetPurplishBlue"/>
-      <GisCore :mWidth="600" :mHeight="400" baseMapUrl="ChinaStreetWarm"/> -->
+      <GisCore :mWidth="600" :mHeight="400" :mCenterPoint="point" :mZoom="zoom"/>
+      <GisCore :mWidth="600" :mHeight="400" :mZoom="zoom"/>
     </div>
+    <input id="zoom" type="number" v-model="zoom">
+    <button @click="changePoint">点我改变中心点</button>
+    <button @click="changeZoom">点我改变缩放</button>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'App'
+  name: 'App',
+  data(){
+    return{
+      point:[114.05, 22.27],
+      zoom:10,
+    }
+  },
+  methods:{
+    changePoint(){
+      this.point = [144.9530982345, 44.277755199]
+    },
+    changeZoom(){
+      this.zoom = 8
+    },
+    mouseWheel(event){
+      console.log(event);
+    },
+    doubleClick(event){
+      console.log(event);
+    },
+    drag(event){
+      console.log(event);
+    },
+    keyDown(event){
+      console.log(event);
+    }
+  }
 }
 </script>
 
