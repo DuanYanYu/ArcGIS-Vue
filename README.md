@@ -1,5 +1,7 @@
 # 快速开始
 
+组件文档访问地址：https://duanyanyu.github.io/ArcGIS-Vue/
+
 由于该组件没有内置arcgis，所以使用之前仍需按照正常方式导入arcgis库。
 ### 1. 安装并引用arcgis
 #### 安装
