@@ -3,6 +3,7 @@
     </div>
 </template>
 
+<script src="https://js.arcgis.com/4.22/"></script>
 <script>
 import Basemap from "@arcgis/core/Basemap";
 import Map from "@arcgis/core/Map";

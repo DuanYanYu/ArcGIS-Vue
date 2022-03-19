@@ -1,7 +1,8 @@
 const moment = require('moment');
-
+const webpack = require("webpack");
 module.exports = {
     title: '组件库 | vue-arcgismap',
+    // base:'',
     head: [
         ['link', { rel: 'icon', href: 'logo.png' }]
     ],
@@ -34,12 +35,19 @@ module.exports = {
             '@vuepress/last-updated',
             {
                 transformer: (timestamp, lang) => {
-                  // 不要忘了安装 moment
-                  const moment = require('moment')
                   moment.locale(lang)
                   return moment(timestamp).format('YYYY年MM月DD日')
                 }
             }
         ]
-    ]
+    ],
+    configureWebpack: {
+        plugins: [
+            // 限制只打一个包，不分Chunk
+            new webpack.optimize.LimitChunkCountPlugin({
+              maxChunks: 1
+            })
+          ],
+          // 当库里面引入了比较大的文件时，为了不影响主包大小，需要设置下该包使用外部引入
+    }
   }

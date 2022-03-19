@@ -4,7 +4,9 @@
 
 &#12288;&#12288;使用该组件创建一个arcgis地图非常简单，只需要以下代码就可以生成一个默认样式的地图以供展示。
 
-<GisCore :mHeight="400" :mWidth="600"/>
+<ClientOnly>
+  <GisCore :mHeight="400" :mWidth="600"/>
+</ClientOnly>
 
 ### 代码
 
@@ -17,9 +19,9 @@
 ## 默认样式 useDefaultUi
 
 &#12288;&#12288;相信很多在使用ArcGIS API的开发者都知道在创建默认地图的时候地图会带有缩放按钮及底部“powered by ESRI”的版权样式，该组件库在默认情况下已经去掉了这些内容以提供一个纯粹简洁的地图，当然考虑到有这些需求的开发者，该组件也提供了 `useDefaultUi` 属性在初始化地图时以显示这些内容。
-
-<GisCore :mHeight="400" :mWidth="600" useDefaultUi/>
-
+<ClientOnly>
+  <GisCore :mHeight="400" :mWidth="600" useDefaultUi/>
+</ClientOnly>
 ### 代码
 
 ```vue
@@ -34,23 +36,34 @@
 
 ### ColorMapChina：中国地图彩色版
 <br />
-<GisCore :mWidth="600" :mHeight="400" baseMapUrl="ColorMapChina"/> <br />
+
+<ClientOnly>
+  <GisCore :mWidth="600" :mHeight="400" baseMapUrl="ColorMapChina"/> <br />
+</ClientOnly>
 
 ### ColorMapEng：中国地图彩色英文版（含POI）
 <br />
-<GisCore :mWidth="600" :mHeight="400" baseMapUrl="ColorMapEng"/> <br />
+<ClientOnly>
+  <GisCore :mWidth="600" :mHeight="400" baseMapUrl="ColorMapEng"/> <br />
+</ClientOnly>
 
 ### ChinaStreetGray：中国地图灰色版
 <br />
-<GisCore :mWidth="600" :mHeight="400" baseMapUrl="ChinaStreetGray"/> <br />
+<ClientOnly>
+  <GisCore :mWidth="600" :mHeight="400" baseMapUrl="ChinaStreetGray"/> <br />
+</ClientOnly>
 
 ### ChinaStreetPurplishBlue：中国地图蓝黑版
 <br />
-<GisCore :mWidth="600" :mHeight="400" baseMapUrl="ChinaStreetPurplishBlue"/> <br />
+<ClientOnly>
+  <GisCore :mWidth="600" :mHeight="400" baseMapUrl="ChinaStreetPurplishBlue"/> <br />
+</ClientOnly>
 
 ### ChinaStreetWarm：中国地图暖色版
 <br />
-<GisCore :mWidth="600" :mHeight="400" baseMapUrl="ChinaStreetWarm"/>
+<ClientOnly>
+  <GisCore :mWidth="600" :mHeight="400" baseMapUrl="ChinaStreetWarm"/>
+</ClientOnly>
 
 ### 代码
 
@@ -74,8 +87,9 @@
 ## 中心点 mCenterPoint
 
 &#12288;&#12288;此组件默认中心点设置为 `144.9530982345, 44.277755199` 即西安市，也可以通过`baseMapUrl` 属性设置地图中心点，**该属性具有响应式效果** 。
-
-<GisCore :mWidth="600" :mHeight="400" :mCenterPoint="[114.05, 22.27]"/>
+<ClientOnly>
+  <GisCore :mWidth="600" :mHeight="400" :mCenterPoint="[114.05, 22.27]"/>
+</ClientOnly>
 
 ### 代码
 
@@ -103,8 +117,9 @@ export default {
 ## 缩放级别 mZoom
 
 &#12288;&#12288;该属性为地图的缩放级别，默认值为3，**该属性具有响应式效果**。
-
-<GisCore :mWidth="600" :mHeight="400" :mZoom="10"/>
+<ClientOnly>
+  <GisCore :mWidth="600" :mHeight="400" :mZoom="10"/>
+</ClientOnly>
 
 ```vue
 <template>
@@ -149,7 +164,7 @@ export default {
 |     属性名      |   类型   | 说明        |              默认值               |                   可选值                    |
 | :----------: | :----: | --------- | :----------------------------: | :--------------------------------------: |
 | mCenterPoint | Array  | 地图的中心点坐标。 | [108.953098279, 34.2777998978] | 经度整数部分为0-180,小数部分为0到12位； 纬度整数部分为0-90,小数部分为0到12位 |
-|    mZoom     | Number | 地图的缩放级别   |               3                |                   大于1                    |
+|    mZoom     | Number | 地图的缩放级别   |               3                |                 大于等于0的整数                 |
 
 
 

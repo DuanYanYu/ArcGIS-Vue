@@ -2,7 +2,6 @@
   <div id="app">
     <div>
       <GisCore :mWidth="600" :mHeight="400" :mCenterPoint="point" :mZoom="zoom"/>
-      <GisCore :mWidth="600" :mHeight="400" :mZoom="zoom"/>
     </div>
     <input id="zoom" type="number" v-model="zoom">
     <button @click="changePoint">点我改变中心点</button>
