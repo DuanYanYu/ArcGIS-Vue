@@ -2,7 +2,7 @@ const moment = require('moment');
 const webpack = require("webpack");
 module.exports = {
     title: '组件库 | vue-arcgismap',
-    // base:'',
+    base:'/ArcGIS-Vue/',
     head: [
         ['link', { rel: 'icon', href: 'logo.png' }]
     ],
