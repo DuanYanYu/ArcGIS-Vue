@@ -141,7 +141,7 @@ export default {
                 pointLayerObj['popupTemplate'] = popupTemplate
             }
 
-            this.$parentComponent = this.$arcMapComponent = this.pointLayer = new FeatureLayer(pointLayerObj);
+            this.$arcMapComponent = this.pointLayer = new FeatureLayer(pointLayerObj);
             this.pointLayer.on('click', function(e){
                 alert(e)
             })
