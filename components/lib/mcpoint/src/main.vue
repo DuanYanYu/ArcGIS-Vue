@@ -25,8 +25,7 @@ export default {
             }
         },
         icon: { // 图标的地址
-            type: String,
-            default: 'static/imgs/point.png'
+            type: String
         },
         iconWidth: { // 图标的宽度
             type: Number,
@@ -105,7 +104,7 @@ export default {
                 //海量点图标
                 field: "color",
                 defaultSymbol: new PictureMarkerSymbol({
-                    url: this.icon,
+                    url: this.icon?this.icon:'static/imgs/point.png',
                     height: this.iconHeight,
                     width: this.iconWidth,
                 })
