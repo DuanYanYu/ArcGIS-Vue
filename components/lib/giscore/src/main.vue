@@ -108,7 +108,7 @@ export default {
                 title: "basemap",
                 id: "basemap"
             });
-            this.$arcMapComponent =  this.map = new Map({
+            this.$parentComponent = this.$arcMapComponent =  this.map = new Map({
                 basemap: basemap
             });
             this.view = new MapView({

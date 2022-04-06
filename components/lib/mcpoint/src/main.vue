@@ -26,9 +26,7 @@ export default {
         },
         icon: { // 图标的地址
             type: String,
-            //? this.icon:`/static/imgs/point.png`
-            // require('../public/static/imgs/point.png')
-            default: '/static/imgs/point.png'
+            default: 'static/imgs/point.png'
         },
         iconWidth: { // 图标的宽度
             type: Number,
@@ -170,9 +168,6 @@ export default {
                     })
                 }
             }
-
-            console.log(content);
-
             let popupTemplate = new PopupTemplate({
                 title:this.popupTemplate.title,
                 content,
