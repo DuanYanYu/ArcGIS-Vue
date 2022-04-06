@@ -1,7 +1,8 @@
 import GisCore from './giscore';
-
+import McPoint from './mcpoint';
 const components = {
-    GisCore
+    GisCore,
+    McPoint
 }
 
 const install = function(Vue){

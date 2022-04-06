@@ -26,8 +26,8 @@ Vue.use(ArcGisComponents)
 
 // 按需引用
 import "arcgis4js-components/dist/css/demo.css";
-import {Demo} from "arcgis4js-components";
-Vue.use(Demo)
+import {GisCore} from "arcgis4js-components";
+Vue.use(GisCore)
 ```
 
 ## 4. 组件使用
