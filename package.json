@@ -25,6 +25,7 @@
     "core-js": "^3.6.5",
     "moment": "^2.29.1",
     "sass": "^1.49.9",
+    "uppercamelcase": "^3.0.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {

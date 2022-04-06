@@ -1,0 +1,3 @@
+export default {
+  ARCMAP_READY_EVENT: 'ARCMAP_READY_EVENT'
+};

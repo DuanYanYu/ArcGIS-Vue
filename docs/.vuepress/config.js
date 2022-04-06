@@ -2,7 +2,7 @@ const moment = require('moment');
 const webpack = require("webpack");
 module.exports = {
     title: '组件库 | vue-arcgismap',
-    base:'/ArcGIS-Vue/',
+    // base:'/ArcGIS-Vue/',
     head: [
         ['link', { rel: 'icon', href: 'logo.png' }]
     ],
@@ -10,7 +10,10 @@ module.exports = {
         sidebar: [
             ['/', '首页'],
             ['/componentDoc/first', '快速开始'], 
-            ['/componentDoc/gisCore', '地图']     
+            ['/componentDoc/gisCore', '地图'],
+            ['/componentDoc/point', '点标记'],
+            ['/componentDoc/mapLayer', '自定义数据图层'],
+            ['/componentDoc/vectorgraph', '矢量图形'],
         ],
         nav: [
             { text: '首页', link: '/' },

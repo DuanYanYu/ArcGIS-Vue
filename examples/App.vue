@@ -1,11 +1,19 @@
 <template>
   <div id="app">
-    <div>
-      <GisCore :mWidth="600" :mHeight="400" :mCenterPoint="point" :mZoom="zoom"/>
+    <div class="map">
+      <GisCore ref="arcgismap" :mWidth="600" :mHeight="400" :mCenterPoint="point" :mZoom="zoom">
+          <mc-point></mc-point>
+          <mc-point :point="[118.05, 34.2777998978]" :icon="require('./assets/point.png')"></mc-point>
+          <mc-point :point="[100.05, 34.2777998978]" :icon="pointIcon"></mc-point>
+          <mc-point :point="[100.05, 20.2777998978]" :icon="pointIcon" :popupTemplate="popupTemplate"></mc-point>
+      </GisCore>
     </div>
-    <input id="zoom" type="number" v-model="zoom">
+    
+    <input id="zoom" type="number" v-model.number="zoom">
     <button @click="changePoint">点我改变中心点</button>
+    <button @click="updatePoint">点我改变点坐标</button>
     <button @click="changeZoom">点我改变缩放</button>
+    <button @click="getMap">获取地图实例</button>
   </div>
 </template>
 
@@ -16,11 +24,34 @@ export default {
   data(){
     return{
       point:[114.05, 22.27],
-      zoom:10,
+      zoom:3,
+      pointIcon:require('./assets/logo.png'),
+      popupTemplate:{
+        title:'描述',
+        content:[{
+          type: 'fields',
+          fieldInfos:[
+          {
+            fieldName: 'NAME',
+            label: 'abc',
+            data: '东经114°05°,北纬22°27°'
+          },{
+            fieldName: 'POSITION',
+            label: '地点',
+            data: '西安市'
+          }]
+        }]
+      }
     }
   },
   methods:{
+    getMap(){
+      console.log(this.$refs.arcgismap.$$getInstance());
+    },
     changePoint(){
+      this.point = [144.9530982345, 44.277755199]
+    },
+    updatePoint(){
       this.point = [144.9530982345, 44.277755199]
     },
     changeZoom(){
@@ -43,7 +74,7 @@ export default {
 </script>
 
 <style>
-#app>div{
+#app>div.map{
   width: 600px;
   height: 600px;
 }

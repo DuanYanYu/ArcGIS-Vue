@@ -1,9 +1,14 @@
 <template>
-    <div id="giscore" class="mc-giscore" :style="[{width: mWidth? mWidth+'px':''},{height: mHeight? mHeight + 'px':''}]">
+    <div class="main-map-box">
+        <div class="mc-giscore" :style="[{width: mWidth? mWidth+'px':''},{height: mHeight? mHeight + 'px':''}]"></div>
+        <slot></slot>
     </div>
+    
 </template>
 
 <script>
+import registerMixin from '../../../../mixins/register-component';
+import CONST from '../../../../utils/constant';
 import Basemap from "@arcgis/core/Basemap";
 import Map from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
@@ -11,6 +16,7 @@ import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 import TileInfo from "@arcgis/core/layers/support/TileInfo";
 export default {
     name: 'GisCore',
+    mixins:[registerMixin],
     data(){
         return {
             baseMapList:{
@@ -19,8 +25,7 @@ export default {
                 ColorMapChina2:'http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineCommunity/MapServer', //
                 ChinaStreetGray:'http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer', //灰色中文不含兴趣点版中国基础地图
                 ChinaStreetPurplishBlue:'http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer', //蓝黑色中文不含兴趣点版中国基础地图
-                ChinaStreetWarm:'http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineStreetWarm/MapServer', //暖色中文不含兴趣点版中国基础地图
-                OffshoreChina: 'https://t0.tianditu.gov.cn/vec_w/wmts' // test
+                ChinaStreetWarm:'http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineStreetWarm/MapServer' //暖色中文不含兴趣点版中国基础地图
             }, //底图图层
             map: null,
             view: null,
@@ -45,7 +50,7 @@ export default {
         },
         mZoom:{ //地图显示级别
             type: Number,
-            default:3
+            default: 3
         },
         mCenterPoint:{ //地图中心点位置
             type: Array,
@@ -103,14 +108,14 @@ export default {
                 title: "basemap",
                 id: "basemap"
             });
-            this.map = new Map({
+            this.$parentComponent = this.$arcMapComponent =  this.map = new Map({
                 basemap: basemap
             });
             this.view = new MapView({
                 center: this.mCenterPoint,
                 zoom: this.mZoom,
                 map: this.map,  // References a Map instance
-                container: this.$el,  // References the ID of a DOM element
+                container: this.$el.querySelector('.mc-giscore'),  // References the ID of a DOM element
                 constraints: {
                     lods: TileInfo.create().lods
                 }
@@ -145,6 +150,15 @@ export default {
             this.view.on("key-down", function (event) {
                 th.$emit('key-down', event);
             });
+            this.view.on("click", function (event) {
+                th.$emit('click', event);
+                // console.log(event);
+            });
+
+            this.$emit(CONST.ARCMAP_READY_EVENT, this.$parentComponent);
+            this.$children.forEach(component => {
+                component.$emit(CONST.ARCMAP_READY_EVENT, this.$parentComponent);
+            });
         },
         removeMapUi(){ // 移除地图默认样式和组件
             this.view.ui.remove('zoom')//清除放大缩小按钮
@@ -158,6 +172,15 @@ export default {
         changeZoom(zoom){
             this.view.zoom = zoom;
         }
-    }
+    },
+    beforeDestroy() {
+        if (this.$arcMapComponent) {
+            this.$arcMapComponent.destroy();
+            this.$arcMapComponent = null;
+        }
+    },
+    destroyed() {
+        this.$parentComponent && this.$parentComponent.destroy();
+    },
 }
 </script>

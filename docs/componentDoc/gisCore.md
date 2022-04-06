@@ -176,6 +176,11 @@ export default {
 | double-click |    双击地图     | (event: Event) |
 |     drag     |    拖动地图     | (event: Event) |
 |   key-down   | 上下左右键盘键移动地图 | (event: Event) |
+|    click     |    单击地图     | (event: Event) |
 
+##  ref可用方法
 
+|       方法        |      说明      |    返回值    |
+| :-------------: | :----------: | :-------: |
+| $$getInstance() | 返回arcgis地图实例 | new Map() |
 
