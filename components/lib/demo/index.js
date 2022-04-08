@@ -1,7 +1,7 @@
-import Demo from './src/main.vue'
+import TdtGis from './src/main.vue'
 
-Demo.install = function(Vue){
-    Vue.component(Demo.name, Demo)
+TdtGis.install = function(Vue){
+    Vue.component(TdtGis.name, TdtGis)
 }
 
-export default Demo
+export default TdtGis

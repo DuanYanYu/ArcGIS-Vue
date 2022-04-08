@@ -1,8 +1,10 @@
 import GisCore from './giscore';
 import McPoint from './mcpoint';
+import TdtGis from './mcpoint';
 const components = {
     GisCore,
-    McPoint
+    McPoint,
+    TdtGis
 }
 
 const install = function(Vue){

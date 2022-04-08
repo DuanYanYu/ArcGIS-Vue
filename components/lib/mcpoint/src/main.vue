@@ -104,7 +104,7 @@ export default {
                 //海量点图标
                 field: "color",
                 defaultSymbol: new PictureMarkerSymbol({
-                    url: this.icon?this.icon:'/static/imgs/point.png',
+                    url: this.icon?this.icon:'static/imgs/point.png',
                     height: this.iconHeight,
                     width: this.iconWidth,
                 })

@@ -1,12 +1,8 @@
 <template>
   <div id="app">
     <div class="map">
-      <GisCore ref="arcgismap" :mWidth="600" :mHeight="400" :mCenterPoint="point" :mZoom="zoom">
-          <mc-point></mc-point>
-          <mc-point :point="[118.05, 34.2777998978]" :icon="require('./assets/point.png')"></mc-point>
-          <mc-point :point="[100.05, 34.2777998978]" :icon="pointIcon"></mc-point>
-          <mc-point :point="[100.05, 20.2777998978]" :icon="pointIcon" :popupTemplate="popupTemplate"></mc-point>
-      </GisCore>
+      <TdtGis :mWidth="600" :mHeight="400" :mCenterPoint="point" :mZoom="zoom">
+      </TdtGis>
     </div>
     
     <input id="zoom" type="number" v-model.number="zoom">

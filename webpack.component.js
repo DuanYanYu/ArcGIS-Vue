@@ -18,7 +18,7 @@ makeList('components/lib', list)
 
 module.exports = {
     entry: list,
-    // mode: 'development',
+    mode: 'development',
     output: {
         filename: '[name].umd.js',
         path: path.resolve(__dirname, 'dist'),
@@ -35,7 +35,14 @@ module.exports = {
                 {
                     loader: 'vue-loader'
                 }
-            ]
-        }]
+            ]},
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                exclude: /node_modules/,
+                options: {
+                  appendTsSuffixTo: [/\.vue$/]
+                }
+            }]
     }
 }

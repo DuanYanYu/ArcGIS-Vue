@@ -3,7 +3,8 @@ packages/
 docs/
 .temp/
 components/
-
+*.html
+*.ico
 *.umd.js
 vue.config.js
 babel.config.js
