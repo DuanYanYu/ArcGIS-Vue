@@ -42,7 +42,15 @@ module.exports = {
                   return moment(timestamp).format('YYYY年MM月DD日')
                 }
             }
-        ]
+        ],
+        [
+            'vuepress-plugin-typescript',
+            {
+              tsLoaderOptions: {
+                // ts-loader 的所有配置项
+              },
+            },
+        ],
     ],
     configureWebpack: {
         plugins: [

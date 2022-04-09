@@ -102,7 +102,7 @@ export default {
             });
 
             //加载在线天地图影像
-            this.baseLayer = new TDTlayer();
+            this.baseLayer = new TDTlayer('f6e0f7525c9d5618f59bb0b9cde93751', 'img_c');
             this.map.add(this.baseLayer);
 
             !this.useDefaultUi && this.removeMapUi();

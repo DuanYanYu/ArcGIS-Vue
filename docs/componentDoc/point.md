@@ -243,7 +243,7 @@ export default {
 
 |       方法        |      说明      |    返回值    |
 | :-------------: | :----------: | :-------: |
-| $$getInstance() | 返回点图层的实例 | new Map() |
+| $$getInstance() | 返回点图层的实例 | new FeatureLayer() |
 
 
 

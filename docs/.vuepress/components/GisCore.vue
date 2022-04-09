@@ -13,6 +13,8 @@ import Map from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
 import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 import TileInfo from "@arcgis/core/layers/support/TileInfo";
+import TDTlayer from "../../../utils/TDTlayer.ts";
+
 export default {
     name: 'GisCore',
     mixins:[registerMixin],
@@ -33,15 +35,19 @@ export default {
     props:{
         mWidth:{ //地图的宽
             type: Number,
-            default:0
+            required:true
         },
         mHeight:{ //地图的高
             type: Number,
-            default:0
+            required:true
         },
         baseMapUrl:{ //地图的底图图层
             type: String,
             default: 'ColorMapChina'
+        },
+        tdtBaseMap:{ //使用天地图作为底图
+            type: Object,
+            default: null
         },
         useDefaultUi:{ //是否使用默认样式和组件
             type:Boolean,
@@ -97,19 +103,28 @@ export default {
     },
     methods:{
         initMap(){
-            let basemap = new Basemap({
-                baseLayers: [
-                    new MapImageLayer({
-                        url: Object.getOwnPropertyDescriptor(this.baseMapList, this.baseMapUrl)? this.baseMapList[this.baseMapUrl]:this.baseMapUrl,
-                        title: "Basemap"
-                    })
-                ],
-                title: "basemap",
-                id: "basemap"
-            });
-            this.$parentComponent = this.$arcMapComponent =  this.map = new Map({
-                basemap: basemap
-            });
+            if(this.tdtBaseMap === null){
+                let basemap = new Basemap({
+                    baseLayers: [
+                        new MapImageLayer({
+                            url: Object.getOwnPropertyDescriptor(this.baseMapList, this.baseMapUrl)? this.baseMapList[this.baseMapUrl]:this.baseMapUrl,
+                            title: "Basemap"
+                        })
+                    ],
+                    title: "basemap",
+                    id: "basemap"
+                });
+                this.$parentComponent = this.$arcMapComponent =  this.map = new Map({
+                    basemap: basemap
+                });
+            }else{
+                this.$parentComponent = this.$arcMapComponent = this.map = new Map();
+                //加载在线天地图影像
+                this.baseLayer = new TDTlayer(this.tdtBaseMap.tk, this.tdtBaseMap.mapType);
+                this.map.add(this.baseLayer);
+            }
+            
+            
             this.view = new MapView({
                 center: this.mCenterPoint,
                 zoom: this.mZoom,

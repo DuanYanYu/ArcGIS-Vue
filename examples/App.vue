@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <div class="map">
-      <TdtGis :mWidth="600" :mHeight="400" :mCenterPoint="point" :mZoom="zoom">
-      </TdtGis>
+      <GisCore :mHeight="400" :mWidth="600" :tdtBaseMap="tdtProp"/>
     </div>
     
     <input id="zoom" type="number" v-model.number="zoom">
@@ -21,6 +20,10 @@ export default {
     return{
       point:[114.05, 22.27],
       zoom:3,
+      tdtProp:{
+        tk:'f6e0f7525c9d5618f59bb0b9cde93751',
+        mapType:'img_c'
+      },
       pointIcon:require('./assets/logo.png'),
       popupTemplate:{
         title:'描述',
