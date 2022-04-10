@@ -236,7 +236,7 @@ export default {
 |     icon      |   点标记的图标地址    | String |            point.png            |  --  |
 |   iconWidth   |    点标记的宽度     | Number |               22                |  --  |
 |  iconHeight   |    点标记的高度     | Number |               22                |  --  |
-| popupTemplate | 点击坐标点弹出框显示的数据 | Object |               --                |  --  |
+| popupTemplate | 点击坐标点弹出框显示的数据 | Object |               --                |  [详情查看上面属性介绍](#弹出框-popuptemplate)  |
 
 
 ##  ref可用方法
