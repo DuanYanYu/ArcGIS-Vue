@@ -3,38 +3,52 @@
         <div class="mc-giscore" :style="[{width: mWidth? mWidth+'px':''},{height: mHeight? mHeight + 'px':''}]"></div>
         <slot></slot>
     </div>
-    
 </template>
 
 <script>
 import registerMixin from '../../../../mixins/register-component';
 import CONST from '../../../../utils/constant';
+import Basemap from "@arcgis/core/Basemap";
 import Map from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
+import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 import TileInfo from "@arcgis/core/layers/support/TileInfo";
+// import Sketch from "@arcgis/core/widgets/Sketch";
 import TDTlayer from "../../../../utils/TDTlayer.ts";
 export default {
-    name: 'TdtGis',
+    name: 'Demo',
     mixins:[registerMixin],
     data(){
-        return { //底图图层
+        return {
+            baseLayer:null,
+            baseMapList:{
+                ColorMapChina:'http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineCommunity_Mobile/MapServer', //中国地图彩色版
+                ColorMapEng:'http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineCommunityENG/MapServer', //中国地图彩色英文版
+                ColorMapChina2:'http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineCommunity/MapServer', //
+                ChinaStreetGray:'http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer', //灰色中文不含兴趣点版中国基础地图
+                ChinaStreetPurplishBlue:'http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer', //蓝黑色中文不含兴趣点版中国基础地图
+                ChinaStreetWarm:'http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineStreetWarm/MapServer' //暖色中文不含兴趣点版中国基础地图
+            }, //底图图层
             map: null,
             view: null,
-            baseLayer:null
         }
     },
     props:{
         mWidth:{ //地图的宽
             type: Number,
-            default:0
+            required:true
         },
         mHeight:{ //地图的高
             type: Number,
-            default:0
+            required:true
         },
         baseMapUrl:{ //地图的底图图层
             type: String,
             default: 'ColorMapChina'
+        },
+        tdtBaseMap:{ //使用天地图作为底图
+            type: Object,
+            default: null
         },
         useDefaultUi:{ //是否使用默认样式和组件
             type:Boolean,
@@ -90,37 +104,100 @@ export default {
     },
     methods:{
         initMap(){
-            this.map = new Map();
-            this.view = new MapView({
-                map: this.map,
+            if(this.tdtBaseMap === null){
+                this.baseLayer = new MapImageLayer({
+                    url: Object.getOwnPropertyDescriptor(this.baseMapList, this.baseMapUrl)? this.baseMapList[this.baseMapUrl]:this.baseMapUrl,
+                    title: "Basemap"
+                });
+                let basemap = new Basemap({
+                    baseLayers: [this.baseLayer],
+                    title: "basemap",
+                    id: "basemap"
+                });
+                this.map = new Map({
+                    basemap: basemap,
+                });
+            }else{
+                this.map = new Map({
+                });
+                //加载在线天地图影像
+                this.baseLayer = new TDTlayer(this.tdtBaseMap.tk, this.tdtBaseMap.mapType);
+                this.map.add(this.baseLayer);
+            }
+            
+            
+            this.$parentComponent = this.$arcMapComponent = this.view = new MapView({
                 center: this.mCenterPoint,
                 zoom: this.mZoom,
-                container: this.$el.querySelector('.mc-giscore'),
+                map: this.map,  // References a Map instance
+                container: this.$el.querySelector('.mc-giscore'),  // References the ID of a DOM element
                 constraints: {
                     lods: TileInfo.create().lods
                 }
             });
+                        
+            console.log(this.view);
 
-            //加载在线天地图影像
-            this.baseLayer = new TDTlayer('f6e0f7525c9d5618f59bb0b9cde93751', 'img_c');
-            this.map.add(this.baseLayer);
+            console.log(this.view.map === this.map);
 
             !this.useDefaultUi && this.removeMapUi();
+            const th = this;
+            // this.view.when(function(){
+            //     // All the resources in the MapView and the map have loaded. Now execute additional processes
+            //     const sketch = new Sketch({
+            //         layer: th.graphicsLayer,
+            //         view: th.view,
+            //         // graphic will be selected as soon as it is created
+            //         // creationMode: "update"
+            //     });
 
-            this.view.when(function(){
-                // All the resources in the MapView and the map have loaded. Now execute additional processes
-                
-            }, function(error){
-                // Use the errback function to handle when the view doesn't load properly
-                console.log("The view's resources failed to load: ", error);
-            });
+            //     th.view.ui.add(sketch, "top-right");
+
+            //     // Listen to sketch widget's create event.
+            //     sketch.on("create", function(event) {
+            //         // check if the create event's state has changed to complete indicating
+            //         // the graphic create operation is completed.
+            //         if (event.state === "complete") {
+            //             // remove the graphic from the layer. Sketch adds
+            //             // the completed graphic to the layer by default.
+            //             // th.graphicsLayer.remove(event.graphic);
+            //             let data = null;
+            //             if(event.graphic.geometry.type === 'point'){
+            //                 data = {
+            //                     type: 'point',
+            //                     data: [event.graphic.geometry.longitude, event.graphic.geometry.latitude],
+            //                     attributes: event.graphic.attributes
+            //                 }
+            //             }else if(event.graphic.geometry.type === 'polyline'){
+            //                 data = {
+            //                     type: 'polyline',
+            //                     data: event.graphic.geometry.paths,
+            //                     attributes: event.graphic.attributes
+            //                 }
+            //             }else if(event.graphic.geometry.type === 'polygon'){
+            //                 data = {
+            //                     type: 'polygon',
+            //                     data: event.graphic.geometry.rings,
+            //                     attributes: event.graphic.attributes
+            //                 }
+            //             }
+            //             console.log(data);
+            //             return th.$emit('draw-complete', data);
+            //             // use the graphic.geometry to query features that intersect it
+            //             // selectFeatures(event.graphic.geometry);
+            //         }
+            //     });
+            // }, function(error){
+            //     // Use the errback function to handle when the view doesn't load properly
+            //     console.log("The view's resources failed to load: ", error);
+            // });
             // mouse-wheel   鼠标滚动轮事件
             // double-click 双击放大
             // drag  移动
             // key-down  上下箭头移动
             // "drag", ["Shift"]   Shift+拖拽拉框放大
             // "drag", ["Shift", "Control"]   Shift+Ctrl+拖拽拉框缩小
-            let th = this;
+            
             this.view.on("mouse-wheel", function (event) {
                 console.log(th.view.zoom);
                 th.$emit('mouse-wheel', event);
@@ -144,6 +221,7 @@ export default {
                 component.$emit(CONST.ARCMAP_READY_EVENT, this.$parentComponent);
             });
         },
+        
         removeMapUi(){ // 移除地图默认样式和组件
             this.view.ui.remove('zoom')//清除放大缩小按钮
             this.view.ui.remove('attribution')//清楚底部powered by ESRI

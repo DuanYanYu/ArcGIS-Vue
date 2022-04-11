@@ -113,18 +113,18 @@ export default {
                     title: "basemap",
                     id: "basemap"
                 });
-                this.$parentComponent = this.$arcMapComponent =  this.map = new Map({
+                this.map = new Map({
                     basemap: basemap
                 });
             }else{
-                this.$parentComponent = this.$arcMapComponent = this.map = new Map();
+                this.map = new Map();
                 //加载在线天地图影像
                 this.baseLayer = new TDTlayer(this.tdtBaseMap.tk, this.tdtBaseMap.mapType);
                 this.map.add(this.baseLayer);
             }
             
             
-            this.view = new MapView({
+            this.$parentComponent = this.$arcMapComponent = this.view = new MapView({
                 center: this.mCenterPoint,
                 zoom: this.mZoom,
                 map: this.map,  // References a Map instance

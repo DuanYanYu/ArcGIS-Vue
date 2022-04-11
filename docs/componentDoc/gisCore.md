@@ -90,7 +90,7 @@
 
 ## 天地图 tdtBaseMap
 
-&#12288;&#12288;该组件可以配置`tdtBaseMap` 属性实现调用天地图图层作为底图的功能。`tdtBaseMap` 属性为一个对象，需要配置两个属性`tk `、 `mapType`这两个属性的值得类别都为`String`；`tk` 属性为天地图API时注册的[密钥](https://console.tianditu.gov.cn/api/register)；`mapType` 为天地图提供的[图层的类别](http://lbs.tianditu.gov.cn/server/MapService.html)。该属性提供以下几个值：
+&#12288;&#12288;该组件可以配置`tdtBaseMap` 属性实现调用天地图图层作为底图的功能。 ** 注意： ** 在使用天地图属性后，`baseMapUrl` 属性失效 `tdtBaseMap` 属性为一个对象，需要配置两个属性`tk `、 `mapType`这两个属性的值得类别都为`String`；`tk` 属性为天地图API时注册的[密钥](https://console.tianditu.gov.cn/api/register)；`mapType` 为天地图提供的[图层的类别](http://lbs.tianditu.gov.cn/server/MapService.html)。该属性提供以下几个值：
 
 | mapType的值 |  说明（图层名称）  |
 | :-------: | :--------: |

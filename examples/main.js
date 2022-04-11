@@ -4,11 +4,13 @@ import App from './App.vue'
 import '../components/css/index.scss'
 import GisCore from '../components/lib/giscore'
 import McPoint from '../components/lib/mcpoint'
+import McWidget from '../components/lib/mcwidget'
 import Demo from '../components/lib/demo'
 
 
 Vue.use(GisCore)
 Vue.use(McPoint)
+Vue.use(McWidget)
 Vue.use(Demo)
 
 Vue.config.productionTip = false

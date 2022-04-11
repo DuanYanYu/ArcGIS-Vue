@@ -13,7 +13,14 @@ module.exports = {
             ['/componentDoc/gisCore', '地图'],
             ['/componentDoc/point', '点标记'],
             ['/componentDoc/mapLayer', '自定义数据图层'],
-            ['/componentDoc/vectorgraph', '矢量图形'],
+            {
+                title: '矢量图形',   // 必要的
+                collapsable: false, // 可选的, 默认值是 true,
+                sidebarDepth: 1,    // 可选的, 默认值是 1
+                children: [
+                    ['/componentDoc/vectorgraph/sketch', '绘图工具条'],
+                ]
+            },
         ],
         nav: [
             { text: '首页', link: '/' },

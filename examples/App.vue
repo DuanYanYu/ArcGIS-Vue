@@ -1,11 +1,15 @@
 <template>
   <div id="app">
     <div class="map">
-      <GisCore :mHeight="400" :mWidth="600" :tdtBaseMap="tdtProp"/>
+      <GisCore :mHeight="400" :mWidth="600">
+        <mc-point :point=point2></mc-point>
+        <mc-widget :visible="visible" postion="top-right" @draw-complete="drawData"></mc-widget>
+      </GisCore>
     </div>
     
     <input id="zoom" type="number" v-model.number="zoom">
     <button @click="changePoint">点我改变中心点</button>
+    <button @click="visible=!visible">点我工具条显隐性</button>
     <button @click="updatePoint">点我改变点坐标</button>
     <button @click="changeZoom">点我改变缩放</button>
     <button @click="getMap">获取地图实例</button>
@@ -18,7 +22,9 @@ export default {
   name: 'App',
   data(){
     return{
+      visible: true,
       point:[114.05, 22.27],
+      point2:[107.6874711332313,46.510240835957624,],
       zoom:3,
       tdtProp:{
         tk:'f6e0f7525c9d5618f59bb0b9cde93751',
@@ -44,6 +50,9 @@ export default {
     }
   },
   methods:{
+    drawData(data){
+      console.log('父组件zhong ', data);
+    },
     getMap(){
       console.log(this.$refs.arcgismap.$$getInstance());
     },
