@@ -2,7 +2,7 @@
   <div id="app">
     <div class="map">
       <GisCore :mHeight="400" :mWidth="600">
-        <mc-point :point=point2></mc-point>
+        <mc-point :point=point2 :icon="require('./assets/' + pointIcon)"></mc-point>
         <mc-widget :visible="visible" postion="top-right" @draw-complete="drawData"></mc-widget>
       </GisCore>
     </div>
@@ -30,7 +30,7 @@ export default {
         tk:'f6e0f7525c9d5618f59bb0b9cde93751',
         mapType:'img_c'
       },
-      pointIcon:require('./assets/logo.png'),
+      pointIcon:'logo.png',
       popupTemplate:{
         title:'描述',
         content:[{
