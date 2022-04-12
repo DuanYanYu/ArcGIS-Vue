@@ -90,6 +90,50 @@ export default {
 <br />
 
 
+## 绘制图形数据 @draw-complete
+
+&#12288;&#12288;该回调函数会在图形绘制完毕和更新绘制后返回一个数组，数组每项为绘制图像完成或更新绘制图形后的数据对象，之所以为数组是因为在更新时可以选择多个图形来操作所以会返回数组。
+
+&#12288;&#12288;返回的数据格式如下:
+
+```javascript
+[
+  {
+    type: 'polyline',
+    data: [], // 点数据
+  },
+  {
+    type: 'polygon',
+    data: [], // 点数据
+  }
+]
+
+```
+
+### 代码
+
+```Vue
+<template>
+  <div>
+    <GisCore :mWidth="600" :mHeight="400">
+        <mc-widget @draw-complete="drawData"/>
+    </GisCore>
+  </div>
+</template>
+
+<script>
+export default {
+  methods:{
+    drawData(data){
+      console.log('父组件zhong ', data);
+    },
+  }
+}
+</script>
+```
+<br />
+<br />
+
 ## 静态属性
 
 &#12288;&#12288;这里的静态属性用于工具条的初始化，不支持响应式。
@@ -112,9 +156,3 @@ export default {
 |     事件名称      |       说明        |   回调参数   |
 | :-----------: | :-------------: | :------: |
 | draw-complete | 图形绘制或更新完成后触发该函数 | 返回图形数据对象 |
-
-##  ref可用方法
-
-|       方法        |      说明      |    返回值    |
-| :-------------: | :----------: | :-------: |
-| $$getInstance() | 返回arcgis地图实例 | new Map() |
