@@ -6,13 +6,27 @@ module.exports = {
     head: [
         ['link', { rel: 'icon', href: 'logo.png' }]
     ],
+    locales:{
+        '/': {
+            lang: 'zh-CN', // 将会被设置为 <html> 的 lang 属性
+        },
+    },
     themeConfig: {
         sidebar: [
             ['/', '首页'],
             ['/componentDoc/first', '快速开始'], 
             ['/componentDoc/gisCore', '地图'],
             ['/componentDoc/point', '点标记'],
-            ['/componentDoc/mapLayer', '自定义数据图层'],
+            {
+                title: '数据图层',
+                collapsable: false, // 可选的, 默认值是 true,
+                sidebarDepth: 1,    // 可选的, 默认值是 1
+                children: [
+                    ['/componentDoc/layer/marker', '海量点'],
+                    ['/componentDoc/layer/cluster', '点聚合'],
+                    ['/componentDoc/layer/heat', '热力图'],
+                ]
+            },
             {
                 title: '矢量图形',   // 必要的
                 collapsable: false, // 可选的, 默认值是 true,
@@ -57,7 +71,8 @@ module.exports = {
                 // ts-loader 的所有配置项
               },
             },
-        ],
+        ],  
+        ['demo-container-v2'],
     ],
     configureWebpack: {
         plugins: [
@@ -65,7 +80,13 @@ module.exports = {
             new webpack.optimize.LimitChunkCountPlugin({
               maxChunks: 1
             })
-          ],
-          // 当库里面引入了比较大的文件时，为了不影响主包大小，需要设置下该包使用外部引入
+        ],
+        // 当库里面引入了比较大的文件时，为了不影响主包大小，需要设置下该包使用外部引入
+        externals: {
+            '@arcgis': "@arcgis"
+        }
+    },
+    chainWebpack: (config, isServer) => {
+        config.resolve.alias.set('core-js/library/fn', 'core-js/features')
     }
-  }
+}

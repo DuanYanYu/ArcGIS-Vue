@@ -26,8 +26,8 @@ Vue.use(ArcGisComponents)
 
 // 按需引用
 import "arcgis4js-components/dist/css/demo.css";
-import {GisCore} from "arcgis4js-components";
-Vue.use(GisCore)
+import {McGis} from "arcgis4js-components";
+Vue.use(McGis)
 ```
 
 ## 4. 组件使用
@@ -35,7 +35,7 @@ Vue.use(GisCore)
 &#12288;&#12288;使用该组件创建一个arcgis地图非常简单，只需要以下代码就可以生成一个默认样式的地图以供展示。
 
 <ClientOnly>
-  <GisCore :mHeight="400" :mWidth="600" useDefaultUi/>
+  <mc-gis :mHeight="400" :mWidth="600" useDefaultUi/>
 </ClientOnly>
 
 ### 代码

@@ -86,7 +86,7 @@ export default {
                 options.content = this.tmpVM.$refs.node;
             }
             this.initPoint();
-            this.$parentComponent.add(this.pointLayer);
+            this.$parentComponent.map.add(this.pointLayer);
         },
         updatePonit(){
             console.log('更新点坐标了！！');

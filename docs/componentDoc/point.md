@@ -2,112 +2,109 @@
 
 ## 基础示例
 
-&#12288;&#12288;使用坐标点组件必须放在地图组件“容器”中，也就是说必须放在 `<GisCore></GisCore>` 组件中才可以，如下为一个基础示例。
+&#12288;&#12288;使用坐标点组件必须放在地图组件“容器”中，也就是说必须放在 `<mc-gis></mc-gis>` 组件中才可以，如下为一个基础示例。
+::: demo
+```html
+<template>
+  <div>
+    <ClientOnly>  <!-- 请在使用组件时删除该标签。 -->
+      <mc-gis :mWidth="700" :mHeight="400">
+          <mc-point/>
+      </mc-gis>
+    </ClientOnly>
+  </div>
+</template>
 
-<ClientOnly>
-<GisCore :mWidth="600" :mHeight="400">
-<McPoint/>
-</GisCore>
-</ClientOnly>
-
-
-### 代码
-
-```Vue
-<GisCore :mWidth="600" :mHeight="400">
-  <McPoint/>
-</GisCore>
+<script>
+export default {
+  name: 'App',
+}
+</script>
 ```
-<br />
-<br />
+:::
+
 
 ## 坐标 point
 
 &#12288;&#12288;`point` 属性可以指定坐标点，该属性需要传递一个数组，数组第一项为经度，第二项为纬度。默认值为 `[ 108.953098279, 34.2777998978]` 。
 
-<ClientOnly>
-<GisCore :mWidth="600" :mHeight="400">
-<McPoint/>
-<McPoint :point="[116.402975,39.915156]"/>
-</GisCore>
-</ClientOnly>
-
-
-### 代码
-
-```Vue
-<GisCore :mWidth="600" :mHeight="400">
-    <McPoint/>
-    <McPoint :point="[116.402975,39.915156]"/>
-</GisCore>
-```
-<br />
-<br />
-
-## 图标 icon
-
-&#12288;&#12288;  `icon` 属性可以指定坐标的图标，**值得注意的是**在指定路径时，特别的项目中的图片时需要用 `require()` 函数包裹路径地址。
-
-<ClientOnly>
-<GisCore :mWidth="600" :mHeight="400">
-<McPoint :icon="require('../.vuepress/public/static/imgs/myPoint.png')"/>
-</GisCore>
-</ClientOnly>
-
-
-### 代码
-
-```Vue
-
+::: demo
+```html
 <template>
   <div>
-    <GisCore :mWidth="600" :mHeight="400">
-        <McPoint/>
-        <McPoint :icon="pointIcon"/>
-    </GisCore>
+    <ClientOnly>
+
+    <mc-gis :mWidth="700" :mHeight="400">
+        <mc-point :point="point"/>
+    </mc-gis>
+    </ClientOnly>
+
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'App',
   data(){
     return{
-      pointIcon:require('/public/static/imgs/myPoint.png')
+        point: [116.402975,39.915156]
     }
   },
 }
 </script>
 ```
+:::
 
-<br />
-<br />
+## 图标 icon
 
-## 宽高 iconWidth & iconHeight
+&#12288;&#12288;  `icon` 属性可以指定坐标的图标，**值得注意的是**在指定路径时，特别的项目中的图片时需要用 `require()` 函数包裹路径地址。
 
-&#12288;&#12288; 可以使用`iconWidth` 、`iconHeight` 属性来分别指定图标的宽度和高度。
-
-<ClientOnly>
-<GisCore :mWidth="600" :mHeight="400">
-<McPoint :iconWidth="28" :iconHeight="28"/>
-</GisCore>
-</ClientOnly>
-
-### 代码
-
-```Vue
-
+::: demo
+```html
 <template>
   <div>
-    <GisCore :mWidth="600" :mHeight="400">
-        <McPoint :iconWidth="width" :iconHeight="height" />
-    </GisCore>
+    <ClientOnly>
+
+    <mc-gis :mWidth="700" :mHeight="400">
+        <mc-point :icon="icon"/>
+    </mc-gis>
+    </ClientOnly>
+
   </div>
 </template>
 
 <script>
+export default {
+  name: 'App',
+  data(){
+    return{
+        icon: require('../.vuepress/public/static/imgs/myPoint.png')
+    }
+  },
+}
+</script>
+```
+:::
 
+## 图标宽高 iconWidth & iconHeight
+
+&#12288;&#12288; 可以使用`iconWidth` 、`iconHeight` 属性来分别指定图标的宽度和高度。
+
+::: demo
+```html
+<template>
+  <div>
+    <ClientOnly>
+
+    <mc-gis :mWidth="700" :mHeight="400">
+        <mc-point :iconWidth="width" :iconHeight="height"/>
+    </mc-gis>
+    </ClientOnly>
+
+  </div>
+</template>
+
+<script>
 export default {
   name: 'App',
   data(){
@@ -119,6 +116,7 @@ export default {
 }
 </script>
 ```
+:::
 
 ## 弹出框 popupTemplate
 
@@ -156,47 +154,23 @@ export default {
   }
   ```
 
-
-
 &#12288;&#12288;点击下面的坐标查看弹出框。
 
-<ClientOnly>
-<GisCore :mWidth="600" :mHeight="400">
-<McPoint :popupTemplate="{
-        title:'描述',
-        content:[{
-          type: 'fields',
-          fieldInfos:[{
-            fieldName: 'Name',
-            label: '地点',
-            data: '西安市'
-          },{
-            fieldName: 'Mine_Area',
-            label: '坐标',
-            data: '108.953098279, 34.2777998978'
-          }]
-        },{
-          type: 'text',
-          text: '西安，简称“镐”，古称长安、镐京，陕西省辖地级市，是陕西省省会。'
-        }]
-      }"/>
-</GisCore>
-</ClientOnly>
-
-### 代码
-
-```Vue
-
+::: demo
+```html
 <template>
   <div>
-    <GisCore :mWidth="600" :mHeight="400">
-        <McPoint :popupTemplate="popupTemplate" />
-    </GisCore>
+    <ClientOnly>
+
+    <mc-gis :mWidth="700" :mHeight="400">
+        <mc-point :popupTemplate="popupTemplate"/>
+    </mc-gis>
+    </ClientOnly>
+
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'App',
   data(){
@@ -224,7 +198,7 @@ export default {
 }
 </script>
 ```
-
+:::
 
 ## 静态属性
 

@@ -80,6 +80,7 @@ export default {
         }
     },
     methods:{
+        // 注册组件
         __initComponent(options) {
             if (this.$slots.default && this.$slots.default.length) {
                 options.content = this.tmpVM.$refs.node;

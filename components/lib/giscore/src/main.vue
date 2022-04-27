@@ -15,7 +15,7 @@ import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 import TileInfo from "@arcgis/core/layers/support/TileInfo";
 import TDTlayer from "../../../../utils/TDTlayer.ts";
 export default {
-    name: 'GisCore',
+    name: 'mc-gis',
     mixins:[registerMixin],
     data(){
         return {

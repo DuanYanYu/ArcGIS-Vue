@@ -2,92 +2,90 @@
 
 ## 基础示例
 
-&#12288;&#12288;使用绘图工具条组件必须放在地图组件“容器”中，也就是说必须放在 `<GisCore></GisCore>` 组件中才可以，如下为一个基础示例。
+&#12288;&#12288;使用绘图工具条组件必须放在地图组件“容器”中，也就是说必须放在 `<mc-gis></mc-gis>` 组件中才可以，如下为一个基础示例。
 
-<ClientOnly>
-<GisCore :mWidth="600" :mHeight="400">
-<mc-widget/>
-</GisCore>
-</ClientOnly>
 
-### 代码
+::: demo
+```html
+<template>
+  <div>
+    <ClientOnly>  <!-- 请在使用组件时删除该标签。 -->
+      <mc-gis :mWidth="700" :mHeight="400">
+          <mc-widget/>
+      </mc-gis>
+    </ClientOnly>
+  </div>
+</template>
 
-```Vue
-<GisCore :mWidth="600" :mHeight="400">
-    <mc-widget/>
-</GisCore>
+<script>
+export default {
+  name: 'App',
+}
+</script>
 ```
-<br />
-<br />
+:::
+
 
 ## 位置 postion
 
 &#12288;&#12288;可以使用`postion`属性指定工具条显示在地图上的位置，默认位置为右上角。该属性有四个值`bottom-left` （左下角）、`bottom-right` （右下角）、`top-left` （左上角）、`top-right` （右上角）。
 
-<ClientOnly>
-<GisCore :mWidth="600" :mHeight="400">
-<mc-widget postion="bottom-left"/>
-</GisCore>
-</ClientOnly>
 
-### 代码
 
-```Vue
+::: demo
+```html
 <template>
   <div>
-    <GisCore :mWidth="600" :mHeight="400">
-        <mc-widget :postion="postion"/>
-    </GisCore>
+    <ClientOnly>  <!-- 请在使用组件时删除该标签。 -->
+      <mc-gis :mWidth="700" :mHeight="400">
+          <mc-widget :postion="postion"/>
+      </mc-gis>
+    </ClientOnly>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'App',
   data(){
-    return{
-      postion: 'bottom-left'
+    return {
+      postion: "bottom-left"
     }
   }
 }
 </script>
 ```
-<br />
-<br />
+:::
 
 ## 可绘制图形 availableCreateTools
 
 &#12288;&#12288;该工具条提供多种类别的图形绘制方法，包括点、线、任意多边形、矩形、圆；默认会提供所有的绘制方法，如果需要只显示部分绘制方法，可以使用该属性配置数组。
 
-<ClientOnly>
-<GisCore :mWidth="600" :mHeight="400">
-<mc-widget :availableCreateTools="['point', 'polyline']"/>
-</GisCore>
-</ClientOnly>
 
-
-### 代码
-
-```Vue
+::: demo
+```html
 <template>
   <div>
-    <GisCore :mWidth="600" :mHeight="400">
-        <mc-widget :postion="availableCreateTools"/>
-    </GisCore>
+    <ClientOnly>  <!-- 请在使用组件时删除该标签。 -->
+      <mc-gis :mWidth="700" :mHeight="400">
+          <mc-widget :availableCreateTools="tools"/>
+      </mc-gis>
+    </ClientOnly>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'App',
   data(){
-    return{
-      availableCreateTools: ['point', 'polyline']
+    return {
+      tools: ['point', 'polyline']
     }
   }
 }
 </script>
 ```
-<br />
-<br />
+:::
 
 
 ## 绘制图形数据 @draw-complete
@@ -115,9 +113,9 @@ export default {
 ```Vue
 <template>
   <div>
-    <GisCore :mWidth="600" :mHeight="400">
+    <mc-gis :mWidth="600" :mHeight="400">
         <mc-widget @draw-complete="drawData"/>
-    </GisCore>
+    </mc-gis>
   </div>
 </template>
 
@@ -125,7 +123,7 @@ export default {
 export default {
   methods:{
     drawData(data){
-      console.log('父组件zhong ', data);
+      console.log('父组件获取的数据： ', data);
     },
   }
 }
