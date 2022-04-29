@@ -33,6 +33,8 @@ module.exports = {
                 sidebarDepth: 1,    // 可选的, 默认值是 1
                 children: [
                     ['/componentDoc/vectorgraph/sketch', '绘图工具条'],
+                    ['/componentDoc/vectorgraph/ployline', '矢量线'],
+                    ['/componentDoc/vectorgraph/ploygon', '矢量面'],
                 ]
             },
         ],

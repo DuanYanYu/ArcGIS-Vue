@@ -4,13 +4,17 @@ import McWidget from './mcwidget';
 import McCluster from './mccluster';
 import McHeat from './mcheat';
 import McMarks from './mcmarks';
+import McLine from './mcline';
+import McPolygon from './mcpolygon';
 const components = {
     GisCore,
     McPoint,
     McWidget,
     McCluster,
     McHeat,
-    McMarks
+    McMarks,
+    McLine,
+    McPolygon
 }
 
 const install = function(Vue){

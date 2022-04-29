@@ -142,7 +142,7 @@ export default {
                 
             }, function(error){
                 // Use the errback function to handle when the view doesn't load properly
-                console.log("The view's resources failed to load: ", error);
+                console.error("The view's resources failed to load: ", error);
             });
             // mouse-wheel   鼠标滚动轮事件
             // double-click 双击放大
@@ -152,7 +152,6 @@ export default {
             // "drag", ["Shift", "Control"]   Shift+Ctrl+拖拽拉框缩小
             let th = this;
             this.view.on("mouse-wheel", function (event) {
-                console.log(th.view.zoom);
                 th.$emit('mouse-wheel', event);
             });
             this.view.on("double-click", function (event) {
@@ -166,7 +165,6 @@ export default {
             });
             this.view.on("click", function (event) {
                 th.$emit('click', event);
-                // console.log(event);
             });
 
             this.$emit(CONST.ARCMAP_READY_EVENT, this.$parentComponent);
