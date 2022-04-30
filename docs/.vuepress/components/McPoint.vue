@@ -89,7 +89,10 @@ export default {
             this.$parentComponent.map.add(this.pointLayer);
         },
         updatePonit(){
-            console.log('更新点坐标了！！');
+            this.$parentComponent.map.remove(this.pointLayer);
+            this.pointLayer = null;
+            this.initPoint();
+            this.$parentComponent.map.add(this.pointLayer);
         },
         initPoint(){
             let graphic = new Graphic({

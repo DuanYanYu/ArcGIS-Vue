@@ -1,15 +1,15 @@
 # 地图
 
-## 基础示例
+## 宽高 mWidth&mHeight
 
-&#12288;&#12288;使用该组件创建一个arcgis地图非常简单，只需要以下代码就可以生成一个默认样式的地图以供展示。
+&#12288;&#12288;使用该组件创建一个arcgis地图非常简单，只需要以下代码就可以生成一个默认样式的地图以供展示。注意这里的宽高值可以传递`Number`和`String`两种类型；如果传递的是`Number`类型的其单位为`px`，如果传递的是`String`类型的，那么需要传递一个带有单位的字符串如：`100vh`，`100vw`等。
 
 ::: demo
 ```html
 <template>
   <div>
     <ClientOnly>  <!-- 请在使用组件时删除该标签。 -->
-      <mc-gis :mWidth="700" :mHeight="400">
+      <mc-gis :mWidth="width" :mHeight="height">
       </mc-gis>
     </ClientOnly>
   </div>
@@ -17,7 +17,15 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      width: 700,
+      height: 400,
+      // width: '100vw',
+      // height: '100vh'
+    }
+  }
 }
 </script>
 ```
@@ -234,13 +242,13 @@ export default {
 
 &#12288;&#12288;这里的静态属性用于地图初始化，不支持响应式。
 
-|     属性名      |   类型    | 说明                                      |      默认值      |                   可选值                    |
-| :----------: | :-----: | --------------------------------------- | :-----------: | :--------------------------------------: |
-|    mWidth    | Number  | 创建地图的宽度（单位px）                           |       0       |                    --                    |
-|   mHeight    | Number  | 创建地图的高度（单位px）                           |       0       |                    --                    |
-|  baseMapUrl  | String  | 设置地图底图的地址，这里提供了7个在线图层以供使用，也可以填入自己底图的地址， | ColorMapChina | ColorMapChina/ <br />ColorMapEng/ <br />ColorMapChina2/ <br />ChinaStreetGray/ <br />ChinaStreetPurplishBlue/ <br />ChinaStreetWarm/ <br />OffshoreChina |
-|  tdtBaseMap  | Object  | 设置地图底图为天地图的底图图层                         |      --       |      [详情请看上方属性介绍](#天地图-tdtbasemap)       |
-| useDefaultUi | Boolean | 提供ArcGIS API的默认样式（放大缩小按钮和底图版权样式）        |     false     |                true/false                |
+|     属性名      |   类型    | 说明                                       |        默认值         |                   可选值                    |
+| :----------: | :-----: | ---------------------------------------- | :----------------: | :--------------------------------------: |
+|    mWidth    | Number  | 如果传递的是`Number`类型即为创建地图的宽度（单位px）;如果是字符串需要自己带着单位，如`100vw` | String \|\| Number |                   ----                   |
+|   mHeight    | Number  | 如果传递的是`Number`类型即为创建地图的高度（单位px）;如果是字符串需要自己带着单位，如`100vh` | String \|\| Number |                  -----                   |
+|  baseMapUrl  | String  | 设置地图底图的地址，这里提供了7个在线图层以供使用，也可以填入自己底图的地址，  |   ColorMapChina    | ColorMapChina/ <br />ColorMapEng/ <br />ColorMapChina2/ <br />ChinaStreetGray/ <br />ChinaStreetPurplishBlue/ <br />ChinaStreetWarm/ <br />OffshoreChina |
+|  tdtBaseMap  | Object  | 设置地图底图为天地图的底图图层                          |         --         |      [详情请看上方属性介绍](#天地图-tdtbasemap)       |
+| useDefaultUi | Boolean | 提供ArcGIS API的默认样式（放大缩小按钮和底图版权样式）         |       false        |                true/false                |
 
 <br /><br />
 

@@ -1,23 +1,18 @@
 <template>
   <div id="app">
     <div class="map">
-      <mc-gis :mHeight="400" :mWidth="600">
+      <mc-gis mHeight="100vh" mWidth="100vw">
+        <mc-point :point="point"></mc-point>
         <!-- <mc-marks :icon="pointIcon" :points="citys" @click-point="getPointData"></mc-marks> -->
-        <mc-cluster :icon="pointIcon" :points="citys"></mc-cluster>
+        <!-- <mc-cluster :icon="pointIcon" :points="citys"></mc-cluster> -->
         <!-- <mc-heat :points="citys"></mc-heat> -->
       </mc-gis>
     </div>
-    
-    <input id="zoom" type="number" v-model.number="zoom">
-    <button @click="changePoint">点我改变中心点</button>
-    <button @click="visible=!visible">点我工具条显隐性</button>
-    <button @click="updatePoint">点我改变点坐标</button>
-    <button @click="changeZoom">点我改变缩放</button>
-    <button @click="getMap">获取地图实例</button>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import citys from '../public/static/js/citys_copy';
 export default {
   name: 'App',
@@ -52,6 +47,13 @@ export default {
     }
   },
   methods:{
+    changePoint2(){
+      this.point = this.point2;
+      this.point[0]+=1;
+      Vue.set(this.point,0,this.point[0]+1)
+      this.point[1]-=1;
+      Vue.set(this.point,1,this.point[1]-1)
+    },
     drawData(data){
       console.log('父组件zhong ', data);
     },
@@ -88,8 +90,8 @@ export default {
 </script>
 
 <style>
-#app>div.map{
-  width: 600px;
-  height: 600px;
+* {
+ margin: 0;
+ padding: 0;
 }
 </style>

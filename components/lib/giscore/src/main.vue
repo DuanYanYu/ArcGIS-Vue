@@ -1,6 +1,6 @@
 <template>
     <div class="main-map-box">
-        <div class="mc-giscore" :style="[{width: mWidth? mWidth+'px':''},{height: mHeight? mHeight + 'px':''}]"></div>
+        <div class="mc-giscore" :style="[{width: width},{height: height}]"></div>
         <slot></slot>
     </div>
 </template>
@@ -33,11 +33,11 @@ export default {
     },
     props:{
         mWidth:{ //地图的宽
-            type: Number,
+            type: [Number, String],
             required:true
         },
         mHeight:{ //地图的高
-            type: Number,
+            type: [Number, String],
             required:true
         },
         baseMapUrl:{ //地图的底图图层
@@ -61,6 +61,14 @@ export default {
             default(){
                 return [108.953098279, 34.2777998978]
             } 
+        }
+    },
+    computed:{
+        width(){
+            return typeof this.mWidth === 'string'?  this.mWidth : this.mWidth + 'px';
+        },
+        height(){
+            return typeof this.mHeight === 'string'?  this.mHeight : this.mHeight + 'px';
         }
     },
     watch:{
