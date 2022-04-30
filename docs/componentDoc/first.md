@@ -20,12 +20,10 @@ npm i arcgis4js-components
 
 ```javascript
 // 全部引入
-import "arcgis4js-components/dist/css/index.css";
 import ArcGisComponents from "arcgis4js-components";
 Vue.use(ArcGisComponents)
 
 // 按需引用
-import "arcgis4js-components/dist/css/demo.css";
 import {McGis} from "arcgis4js-components";
 Vue.use(McGis)
 ```
