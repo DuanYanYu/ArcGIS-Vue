@@ -29,6 +29,22 @@ export default {
         width:{
             type: Number,
             default: 2
+        },
+        show: { //控制图层是否显示或隐藏
+            type: Boolean,
+            default: true
+        }
+    },
+    watch:{
+        show:{
+            handler(val) {
+                if(val){
+                    this.polygonLayer.visible = true;
+                }else{
+                    this.polygonLayer.visible = false;
+                }
+            },
+            immediate: true
         }
     },
     created(){

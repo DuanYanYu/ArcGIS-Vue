@@ -9,7 +9,6 @@ export default {
     mixins:[registerMixin],
     data(){
         return{
-            pointLayer:null,
             tmpVM: null,
             graphicsLayer:null,
             sketch:null
@@ -24,14 +23,21 @@ export default {
             type:Array,
             default: () => ["point", "polyline", "polygon", "rectangle", "circle"]
         },
-        visible:{ //控制工具条的显隐性
-            type:Boolean,
+        show: { //控制工具条是否显示或隐藏
+            type: Boolean,
             default: true
         }
     },
     watch:{
-        visible(val){
-            this.sketch.visible = val
+        show:{
+            handler(val) {
+                if(val){
+                    this.sketch.visible = true;
+                }else{
+                    this.sketch.visible = false;
+                }
+            },
+            immediate: true
         }
     },
     created(){

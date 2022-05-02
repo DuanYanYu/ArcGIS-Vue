@@ -40,6 +40,10 @@ export default {
             default:function(){
                 return {}
             }
+        },
+        show:{ //控制图层是否显示或隐藏
+            type: Boolean,
+            default: true
         }
     },
     watch:{
@@ -49,6 +53,16 @@ export default {
             },
             deep:true
         },
+        show:{
+            handler(val) {
+                if(val){
+                    this.pointLayer.visible = true;
+                }else{
+                    this.pointLayer.visible = false;
+                }
+            },
+            immediate: true
+        }
     },
     created(){
         this.tmpVM = new Vue({

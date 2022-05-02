@@ -39,5 +39,5 @@ Vue.use(McGis)
 ### 代码
 
 ```Vue
-<GisCore :mHeight="400" :mWidth="600" useDefaultUi/>
+<mc-gis :mHeight="400" :mWidth="600" useDefaultUi/>
 ```

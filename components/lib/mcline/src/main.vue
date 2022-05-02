@@ -33,6 +33,22 @@ export default {
         join:{
             type: String,
             default: 'round'
+        },
+        show:{ //控制图层是否显示或隐藏
+            type: Boolean,
+            default: true
+        }
+    },
+    watch:{
+        show:{
+            handler(val) {
+                if(val){
+                    this.lineLayer.visible = true;
+                }else{
+                    this.lineLayer.visible = false;
+                }
+            },
+            immediate: true
         }
     },
     created(){

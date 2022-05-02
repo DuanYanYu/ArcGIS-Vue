@@ -39,6 +39,22 @@ export default {
         usePopup:{
             type: Boolean,
             default: false
+        },
+        show:{ //控制图层是否显示或隐藏
+            type: Boolean,
+            default: true
+        }
+    },
+    watch:{
+        show:{
+            handler(val) {
+                if(val){
+                    this.pointsLayer.visible = true;
+                }else{
+                    this.pointsLayer.visible = false;
+                }
+            },
+            immediate: true
         }
     },
     created(){
@@ -128,9 +144,6 @@ export default {
                 // event is the event handle returned after the event fires.
                 console.log(event.mapPoint);
             });
-            this.pointsLayer.on('click', function(e){
-                alert(e)
-            })
         },
     }
 }

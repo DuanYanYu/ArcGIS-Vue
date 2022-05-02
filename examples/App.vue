@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <div class="map">
+    <div class="map"> 
       <mc-gis mHeight="100vh" mWidth="100vw">
-        <mc-point :point="point"></mc-point>
-        <!-- <mc-marks :icon="pointIcon" :points="citys" @click-point="getPointData"></mc-marks> -->
-        <!-- <mc-cluster :icon="pointIcon" :points="citys"></mc-cluster> -->
+        <!-- <mc-point :point="point"></mc-point> -->
+        <!-- <mc-marker :icon="pointIcon" :points="citys" @click-point="getPointData"></mc-marker> -->
+        <mc-cluster :icon="pointIcon" :points="citys"></mc-cluster>
         <!-- <mc-heat :points="citys"></mc-heat> -->
       </mc-gis>
     </div>
@@ -83,7 +83,7 @@ export default {
     },
     getPointData(obj){
       console.log(obj);
-      alert(obj.name)
+      alert(obj.pointData.name)
     }
   }
 }

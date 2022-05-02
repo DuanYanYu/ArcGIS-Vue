@@ -21,6 +21,22 @@ export default {
             type: Array,
             required: true
         },
+        show:{ //控制图层是否显示或隐藏
+            type: Boolean,
+            default: true
+        }
+    },
+    watch:{
+        show:{
+            handler(val) {
+                if(val){
+                    this.heatMapFeatureLayer.visible = true;
+                }else{
+                    this.heatMapFeatureLayer.visible = false;
+                }
+            },
+            immediate: true
+        }
     },
     created(){
         this.tmpVM = new Vue({

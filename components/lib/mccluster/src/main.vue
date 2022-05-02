@@ -40,6 +40,22 @@ export default {
             type: Number,
             default: 22
         },
+        show:{
+            type: Boolean,
+            default: true
+        }
+    },
+    watch:{
+        show:{
+            handler(val) {
+                if(val){
+                    this.pointsLayer.visible = true;
+                }else{
+                    this.pointsLayer.visible = false;
+                }
+            },
+            immediate: true
+        }
     },
     created(){
         this.tmpVM = new Vue({
