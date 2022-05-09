@@ -5,10 +5,6 @@ import CONSTANTS from '../utils/constant';
 
 export default {
   props: {
-    visible: {
-      type: Boolean,
-      default: true
-    }, // 是否显示，默认 true
     zIndex: {
       type: Number
     }
@@ -17,11 +13,6 @@ export default {
     return {
       unwatchFns: [],
       handlers: {
-        visible(flag) {
-          if (this.show && this.hide) {
-            flag === false ? this.hide() : this.show();
-          }
-        },
         zIndex(value) {
           if (this.setzIndex) {
             this.setzIndex(value);
@@ -128,7 +119,7 @@ export default {
 
     // some prop can not init by initial created methods
     initProps() {
-      const props = ['editable', 'visible', 'zooms'];
+      const props = ['editable', 'zooms'];
 
       props.forEach(propStr => {
         if (this[propStr] !== undefined) {

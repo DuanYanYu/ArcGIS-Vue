@@ -29,11 +29,9 @@ export default {
     watch:{
         show:{
             handler(val) {
-                if(val){
-                    this.heatMapFeatureLayer.visible = true;
-                }else{
-                    this.heatMapFeatureLayer.visible = false;
-                }
+                this.$nextTick(()=>{
+                    this.heatMapFeatureLayer.visible = val;
+                })
             },
             immediate: true
         }
@@ -66,8 +64,8 @@ export default {
             for (let i = 0; i < this.points.length; i++) {
                 let graphic = new Graphic({
                     geometry: new Point({
-                        x: this.points[i][0],
-                        y: this.points[i][1],
+                        x: this.points[i].lnglat[0],
+                        y: this.points[i].lnglat[1],
                         spatialReference: new SpatialReference({
                             wkid: 4490
                         }),

@@ -42,11 +42,9 @@ export default {
     watch:{
         show:{
             handler(val) {
-                if(val){
-                    this.lineLayer.visible = true;
-                }else{
-                    this.lineLayer.visible = false;
-                }
+                this.$nextTick(()=>{
+                    this.lineLayer.visible = val;
+                })
             },
             immediate: true
         }

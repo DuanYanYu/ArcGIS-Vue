@@ -1,4 +1,4 @@
-import GisCore from './giscore';
+import GisCore from './mcgis';
 import McPoint from './mcpoint';
 import McWidget from './mcwidget';
 import McCluster from './mccluster';
@@ -6,6 +6,8 @@ import McHeat from './mcheat';
 import McMarks from './mcmarks';
 import McLine from './mcline';
 import McPolygon from './mcpolygon';
+import BaseLayer from './mcbaselayer';
+
 const components = {
     GisCore,
     McPoint,
@@ -14,7 +16,8 @@ const components = {
     McHeat,
     McMarks,
     McLine,
-    McPolygon
+    McPolygon,
+    BaseLayer
 }
 
 const install = function(Vue){

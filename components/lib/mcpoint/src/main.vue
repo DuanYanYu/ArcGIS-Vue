@@ -55,11 +55,9 @@ export default {
         },
         show:{
             handler(val) {
-                if(val){
-                    this.pointLayer.visible = true;
-                }else{
-                    this.pointLayer.visible = false;
-                }
+                this.$nextTick(()=>{
+                    this.pointLayer.visible = val;
+                })
             },
             immediate: true
         }

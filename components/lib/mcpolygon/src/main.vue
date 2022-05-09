@@ -38,11 +38,9 @@ export default {
     watch:{
         show:{
             handler(val) {
-                if(val){
-                    this.polygonLayer.visible = true;
-                }else{
-                    this.polygonLayer.visible = false;
-                }
+                this.$nextTick(()=>{
+                    this.polygonLayer.visible = val;
+                })
             },
             immediate: true
         }

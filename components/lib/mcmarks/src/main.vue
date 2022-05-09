@@ -48,11 +48,9 @@ export default {
     watch:{
         show:{
             handler(val) {
-                if(val){
-                    this.pointsLayer.visible = true;
-                }else{
-                    this.pointsLayer.visible = false;
-                }
+                this.$nextTick(()=>{
+                    this.pointsLayer.visible = val;
+                })
             },
             immediate: true
         }

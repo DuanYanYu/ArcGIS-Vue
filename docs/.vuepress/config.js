@@ -25,6 +25,7 @@ module.exports = {
                     ['/componentDoc/layer/marker', '海量点'],
                     ['/componentDoc/layer/cluster', '点聚合'],
                     ['/componentDoc/layer/heat', '热力图'],
+                    ['/componentDoc/layer/baselayer', '底图图层'],
                 ]
             },
             {

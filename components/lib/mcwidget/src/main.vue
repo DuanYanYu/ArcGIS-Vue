@@ -31,11 +31,9 @@ export default {
     watch:{
         show:{
             handler(val) {
-                if(val){
-                    this.sketch.visible = true;
-                }else{
-                    this.sketch.visible = false;
-                }
+                this.$nextTick(()=>{
+                    this.sketch.visible = val;
+                })
             },
             immediate: true
         }
