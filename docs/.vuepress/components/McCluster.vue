@@ -41,6 +41,10 @@ export default {
             type: Number,
             default: 22
         },
+        show:{
+            type: Boolean,
+            default: true
+        }
     },
     created(){
         this.tmpVM = new Vue({
@@ -52,6 +56,23 @@ export default {
                 return h('div', {ref: 'node'}, Array.isArray(node) ? node : [node]);
             }
         }).$mount();
+    },
+    watch:{
+        show:{
+            handler(val) {
+                this.$nextTick(()=>{
+                    this.pointsLayer.visible = val;
+                })
+            },
+            immediate: true
+        },
+        points:{
+            handler() {
+
+                this.updatePonits()
+            },
+            deep: true
+        }
     },
     methods:{
         // 注册组件
@@ -76,8 +97,11 @@ export default {
                 })
             }) 
         },
-        updatePonit(){
-            console.log('更新点坐标了！！');
+        updatePonits(){
+            this.$parentComponent.map.remove(this.pointsLayer);
+            this.pointsLayer = null;
+            this.initPoints();
+            this.$parentComponent.map.add(this.pointsLayer);
         },
         initPoints(){
             let features = [];

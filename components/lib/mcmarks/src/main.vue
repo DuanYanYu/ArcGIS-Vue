@@ -53,6 +53,13 @@ export default {
                 })
             },
             immediate: true
+        },
+        points:{
+            handler() {
+
+                this.updatePonits()
+            },
+            deep: true
         }
     },
     created(){
@@ -89,8 +96,12 @@ export default {
                 })
             }) 
         },
-        updatePonit(){
-            console.log('更新点坐标了！！');
+        // 更新点坐标
+        updatePonits(){
+            this.$parentComponent.map.remove(this.pointsLayer);
+            this.pointsLayer = null;
+            this.initPoints();
+            this.$parentComponent.map.add(this.pointsLayer);
         },
         initPoints(){
             let features = [];

@@ -34,6 +34,13 @@ export default {
                 })
             },
             immediate: true
+        },
+        points:{
+            handler() {
+
+                this.updatePonits()
+            },
+            deep: true
         }
     },
     created(){
@@ -56,8 +63,12 @@ export default {
             this.initPoints();
             this.$parentComponent.map.add(this.heatMapFeatureLayer);
         },
-        updatePonit(){
-            console.log('更新点坐标了！！');
+        // 更新点坐标
+        updatePonits(){
+            this.$parentComponent.map.remove(this.heatMapFeatureLayer);
+            this.heatMapFeatureLayer = null;
+            this.initPoints();
+            this.$parentComponent.map.add(this.heatMapFeatureLayer);
         },
         initPoints(){
             let features = [];
